@@ -1,0 +1,1294 @@
+{
+  "name": "Automation of invoice processing from email to Google Drive",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "simple": false,
+        "filters": {
+          "q": "={{'Invoice' || 'invoice'}}",
+          "readStatus": "unread"
+        },
+        "options": {
+          "dataPropertyAttachmentsPrefixName": "Invoice_",
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -20,
+        140
+      ],
+      "id": "c8e4ebd1-ed16-4c84-89da-59e7ed189178",
+      "name": "Gmail",
+      "webhookId": "1f672103-1d91-42cf-9e8a-7a85787df4af",
+      "alwaysOutputData": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "KxbqZpFYmY0ufqTX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb91700c-7347-42ef-86dd-518eb74ceee8",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        -260
+      ],
+      "id": "9a3dfad1-0de9-44d1-8216-02627b888074",
+      "name": "If",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb91700c-7347-42ef-86dd-518eb74ceee8",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1740,
+        -260
+      ],
+      "id": "6c625819-d9cd-4340-a70e-ea5f8ea1033e",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb91700c-7347-42ef-86dd-518eb74ceee8",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2400,
+        -260
+      ],
+      "id": "49ab1bed-765c-48e7-9f1d-e39ad4da8433",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb91700c-7347-42ef-86dd-518eb74ceee8",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3060,
+        -260
+      ],
+      "id": "a0bbdd27-4010-48f2-99a4-e7269dbe47d8",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb91700c-7347-42ef-86dd-518eb74ceee8",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3720,
+        -260
+      ],
+      "id": "b94e6a7b-cfc1-4304-93fa-870c3d7f0a37",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a4a4a672-56a9-490b-9fe8-466e5b7cc002",
+              "name": "attachments",
+              "value": "={{ $('Gmail').item.binary.keys() }}",
+              "type": "array"
+            },
+            {
+              "id": "4c5734cd-dd3f-467c-a011-363503fec6d9",
+              "name": "massage_id",
+              "value": "={{ $('Gmail').item.json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4160,
+        -260
+      ],
+      "id": "0433bd29-17bb-4739-bd0b-45ee190f97a2",
+      "name": "Edit Fields1",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "attachments",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        4380,
+        -260
+      ],
+      "id": "1d4ce769-3638-4159-becd-182d747a7fa5",
+      "name": "Split Out",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "massage_id",
+              "field2": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        4600,
+        -80
+      ],
+      "id": "789dfeb1-8908-46b4-96e0-43f32c5f5e10",
+      "name": "Merge",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ $json.NameCompany }}",
+        "filter": {
+          "folderId": {
+            "mode": "list",
+            "value": "root",
+            "cachedResultName": "/ (Root folder)"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        860,
+        -260
+      ],
+      "id": "c2ba4af0-cce6-4c2b-a6c2-900d9b0410ae",
+      "name": "CheckCompanyFolder",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e9cfc62e-8907-4638-b437-db956c47ab97",
+              "name": "NameCompany",
+              "value": "YourCompany",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        -260
+      ],
+      "id": "f5f02cbd-e253-487b-8dda-a8d8c4c24083",
+      "name": "SetCompanyName"
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('SetCompanyName').item.json.NameCompany }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1300,
+        -185
+      ],
+      "id": "6bda2bb4-7737-4b33-8006-a7d9b1add3ac",
+      "name": "CreateCompanyFolder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "Invoices",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('CheckCompanyFolder').item.json.id }}",
+            "mode": "id"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1520,
+        -260
+      ],
+      "id": "587b45ab-5f7e-47d3-9403-ad063ada52ca",
+      "name": "CheckInviceFolder",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "Invoices",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('CheckCompanyFolder').item.json.id || $('CreateCompanyFolder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1960,
+        -185
+      ],
+      "id": "c0de1f3b-4d95-402b-87c0-087a7f243a5d",
+      "name": "CreateInviceFolder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ new Date($('Gmail').item.json.date).format('yyyy') }}",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('CheckInviceFolder').item.json.id || $('CreateInviceFolder').item.json.id }}",
+            "mode": "id"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2180,
+        -260
+      ],
+      "id": "6b6716a7-ff70-42fc-b008-5b32e8a42fe6",
+      "name": "CheckYearFolder",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ new Date($('Gmail').item.json.date).format('yyyy') }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('CreateInviceFolder').item.json.id ?? $('CheckInviceFolder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2620,
+        -185
+      ],
+      "id": "d02cbe8a-535c-4bf5-9dce-130244be26f0",
+      "name": "CreateYearFolder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ new Date($('Gmail').item.json.date).format('MM') }}",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('CheckYearFolder').item.json.id || $('CreateYearFolder').item.json.id }}",
+            "mode": "id"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2840,
+        -260
+      ],
+      "id": "d78bbc7a-6127-4d42-83f9-1c8ffcb7ef82",
+      "name": "CheckMonthFolder",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ new Date($('Gmail').item.json.date).format('MM') }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('CheckYearFolder').item.json.id || $('CreateYearFolder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3280,
+        -185
+      ],
+      "id": "16d2431a-5b9b-472a-80ff-5b4dcafc3c16",
+      "name": "CreateMonthFolder",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ $('Gmail').item.json.from.value[0].name }}",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('CheckMonthFolder').item.json.id || $('CreateMonthFolder').item.json.id }}",
+            "mode": "id"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3500,
+        -260
+      ],
+      "id": "16aa0d46-95f8-4ad8-98ee-f78c3df747f2",
+      "name": "CheckNameFolder",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Gmail').item.json.from.value[0].name }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('CheckMonthFolder').item.json.id || $('CreateMonthFolder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3940,
+        -185
+      ],
+      "id": "247417be-b2a1-4005-9cb4-11ce0e823f8f",
+      "name": "CreateNameFolder",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        200,
+        140
+      ],
+      "id": "65b485f5-fd95-4ccc-a839-751baffa689e",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        180
+      ],
+      "id": "8a195b37-41f6-4f71-a325-725406ba0a8f"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1oakD_z-jf2U-d0PLX72IrqXG609pah892AhyKAccJC8",
+          "mode": "list",
+          "cachedResultName": "LogInvoiceMail",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oakD_z-jf2U-d0PLX72IrqXG609pah892AhyKAccJC8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oakD_z-jf2U-d0PLX72IrqXG609pah892AhyKAccJC8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Company": "={{ $('SetCompanyName').item.json.NameCompany }}",
+            "Name": "={{ $('Gmail').item.json.from.value[0].name }}",
+            "MailText": "={{ $('Gmail').item.json.text }}",
+            "Year": "={{ new Date($('Gmail').item.json.date).format('yyyy') }}",
+            "Mouth": "={{ new Date($('Gmail').item.json.date).format('MM') }}",
+            "Day": "={{ new Date($('Gmail').item.json.date).format('dd') }}",
+            "Time": "={{ new Date($('Gmail').item.json.date).format('HH:mm') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MailText",
+              "displayName": "MailText",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Year",
+              "displayName": "Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Mouth",
+              "displayName": "Mouth",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Day",
+              "displayName": "Day",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5040,
+        -80
+      ],
+      "id": "46c4e0c8-0b48-4e28-850b-cfbff383d591",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "N9BNrqjMADhy2Cpv",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "q": "={{'Invoice' || 'invoice'}}",
+          "readStatus": "unread"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        140
+      ],
+      "id": "e6f11618-3a2d-47c2-bb17-8a931955da24",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "KxbqZpFYmY0ufqTX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "={{ $json.attachments }}",
+        "name": "={{ $('Merge').item.json.attachments }}_{{ $('Gmail').item.binary.Invoice_0.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('CheckNameFolder').item.json.id ?? $('CreateNameFolder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        4820,
+        -80
+      ],
+      "id": "3ac91b3f-33cf-428d-9f70-7565ea09f828",
+      "name": "UploadFile",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "gnMaAUAfd9sqgBJd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('CheckFilePDF').item.json.id || $('Merge').item.json.massage_id}}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1020,
+        180
+      ],
+      "id": "7a5943dc-b657-44d2-99b2-31e4c1cce1d8",
+      "name": "MarkAsRead",
+      "webhookId": "59d1c12d-a8ee-47e1-8b7a-67c72f686561",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "KxbqZpFYmY0ufqTX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "329984425",
+        "text": "={{ $('Google Sheets').item.json.Name }} from {{ $('Google Sheets').item.json.Company }} send you Mail '{{ $('Google Sheets').item.json.MailText }}'",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        5260,
+        -80
+      ],
+      "id": "8dbeb67d-57c6-4e41-a9de-def16485d731",
+      "name": "SendMessage",
+      "webhookId": "e58ac18c-cc56-4738-ad16-f103c0adb50b",
+      "alwaysOutputData": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "dFBgGohqdfYx3L4J",
+          "name": "Tester"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "329984425",
+        "text": "={{ $json.from.value[0].name }} sent you an email without a PDF file",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        740,
+        180
+      ],
+      "id": "8cba6561-ac42-4b20-8fa2-23a16037f581",
+      "name": "Telegram",
+      "webhookId": "a430115c-1856-44af-bd17-75877866d58b",
+      "credentials": {
+        "telegramApi": {
+          "id": "dFBgGohqdfYx3L4J",
+          "name": "Tester"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "07dcb3fc-e2e2-4c26-a331-2b65f9684ece",
+              "leftValue": "={{ Object.values($input.all()[0].binary).some(file => file.fileExtension === 'pdf') }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        420,
+        -40
+      ],
+      "id": "9b760db4-767e-4c2d-979f-109aa3510ee0",
+      "name": "CheckFilePDF"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "CheckInviceFolder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CreateCompanyFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "CheckYearFolder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CreateInviceFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "CheckMonthFolder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CreateYearFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "CheckNameFolder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CreateMonthFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CreateNameFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "UploadFile",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckCompanyFolder": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SetCompanyName": {
+      "main": [
+        [
+          {
+            "node": "CheckCompanyFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CreateCompanyFolder": {
+      "main": [
+        [
+          {
+            "node": "CheckInviceFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckInviceFolder": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CreateInviceFolder": {
+      "main": [
+        [
+          {
+            "node": "CheckYearFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckYearFolder": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CreateYearFolder": {
+      "main": [
+        [
+          {
+            "node": "CheckMonthFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckMonthFolder": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CreateMonthFolder": {
+      "main": [
+        [
+          {
+            "node": "CheckNameFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckNameFolder": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CreateNameFolder": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "CheckFilePDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "SendMessage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UploadFile": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MarkAsRead": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SendMessage": {
+      "main": [
+        [
+          {
+            "node": "MarkAsRead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "MarkAsRead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckFilePDF": {
+      "main": [
+        [
+          {
+            "node": "SetCompanyName",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "688e76d7-8740-4d18-aac9-50e6b2772d46",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "caa9fcb89fa9c86c8cf16ec6a02292e451700c3d5440315d92c3136f9c9a0556"
+  },
+  "id": "FscKJkCF1T3ahiDV",
+  "tags": []
+}
